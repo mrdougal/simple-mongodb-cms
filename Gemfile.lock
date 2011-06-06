@@ -1,0 +1,32 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    activesupport (2.3.11)
+    bson (1.2.2)
+    durran-validatable (2.0.1)
+    mongo (1.2.2)
+      bson (>= 1.2.2)
+    mongo_ext (0.19.3)
+    mongoid (1.9.5)
+      activesupport (< 3.0.0)
+      bson (~> 1.2.1)
+      durran-validatable (>= 2.0.1)
+      mongo (~> 1.2.1)
+      will_paginate (< 2.9)
+    rack (1.2.1)
+    sinatra (1.1.2)
+      rack (~> 1.1)
+      tilt (~> 1.2)
+    sinatra-mongoid (0.0.2)
+      mongo_ext
+      mongoid
+      sinatra
+    tilt (1.2.2)
+    will_paginate (2.3.15)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  sinatra
+  sinatra-mongoid

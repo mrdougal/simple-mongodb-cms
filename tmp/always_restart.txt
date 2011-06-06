@@ -1,0 +1,2 @@
+Pow (http://pow.cs) will restart sinatra before every request if this file is present.
+http://pow.cx/manual#section_2.5.1
