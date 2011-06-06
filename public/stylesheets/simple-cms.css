@@ -1,0 +1,26 @@
+/* @override http://mongo-talk.dev/stylesheets/simple-cms.css?v=1 */
+
+/*
+
+2011-06-06 
+Dougal MacPherson <hello@newfangled.com.au>
+
+*/
+
+body {
+	background-color: #a8d7e7;
+	margin: 0;
+	padding: 30px;
+	font: 14pt Georgia, "Times New Roman", Times, serif;
+	color: #212424;
+}
+
+header {
+	font-weight: bold;
+}
+
+footer {
+	padding-top: 30px;
+	color: #fffefe;
+	font-size: 12pt;
+}

@@ -3,10 +3,25 @@
 <head>
 	<meta charset="utf-8">
 	<title>MongoDB demo</title>
+	
+	<link rel="stylesheet" href="/stylesheets/base.css">
+	<link rel="stylesheet" href="/stylesheets/simple-cms.css?v=1">
 </head>
 
 	<body>
-		<%= @output %>
+		
+		<header>
+			<%= @header %>
+		</header>
+		
+		
+		<div id="main">
+			<%= @content %>
+		</div>
+		
+		<footer>
+			CMS to explain/demonstrate MongoDB
+		</footer>
 		
 	</body>
 </html>
