@@ -1,0 +1,15 @@
+<% title = 'Welcome' %>
+
+<ul>
+<% @models.each do |model| %>
+	<li>
+		<a href="<%= url(model.slug) %>">
+		<%= model %>	
+		</a>
+	</li>
+	
+<% end %>	
+</ul>
+
+
+<a href="<%= url('new') %>" class="new">New page</a>

@@ -1,0 +1,20 @@
+<% @title = @page.title %>
+
+
+<article>
+	
+	<h1><%= @title %></h1>
+	<p class="meta"><%= @page.created_at %></p>
+	
+	<ul class="tags">
+		<% @page['tags'].each do |tag| %>
+		<li><%= tag %></li>
+		<% end %>
+	</ul>
+	
+	<%= @page.body_html %>	
+</article>
+
+
+
+<a href="<%= url(@page.slug << '/edit') %>" class="edit">Edit</a>

@@ -24,3 +24,34 @@ footer {
 	color: #fffefe;
 	font-size: 12pt;
 }
+
+/* @group forms */
+
+fieldset {
+	padding-bottom: 20px;
+}
+
+label {
+	display: block;
+	margin-bottom: 5px;
+	margin-top: 5px;
+}
+
+input[type=text], textarea {
+	width: 70%;
+	padding: 5px;
+}
+
+textarea {
+	height: 200px;
+}
+
+input[type=submit] {
+	padding: 20px;
+}
+
+a.cancel {
+	color: #c00;
+}
+
+/* @end */

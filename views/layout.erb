@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title><%= @title.nil? ? 'MongoDB demo' : @title %></title>
+	
+	<link rel="stylesheet" href="/stylesheets/base.css">
+	<link rel="stylesheet" href="/stylesheets/simple-cms.css?v=1">
+</head>
+
+	<body>
+		
+		<div id="container">
+			
+			<header>
+				<%= @header %>
+			</header>
+		
+		
+			<div id="main" role="main">
+				<%= yield %>
+			</div>
+		
+			<footer>
+				<p>CMS to explain/demonstrate MongoDB</p>
+			</footer>
+			
+		</div>
+		
+	</body>
+</html>

@@ -1,0 +1,38 @@
+<% @header = "Editing" %>
+
+<% if @page.errors %>
+
+	<ul class="errors">
+	<% @page.errors.each_pair do |key, value| %>
+		<li><%= key %> <%= value.join(' and ') %></li>
+	<% end %>
+	</ul>
+<% end %>
+
+<form action="<%= to(@page['slug']) %>" method="post">
+	
+	<fieldset class="fields">
+		
+		<label for="page_title">Title</label>
+		<input name="page[title]" id="page_title" value="<%= @page['title'] %>" type="text" />
+	
+		<label for="page_body">Body</label>
+		<textarea name="page[body]" id="page_body"><%= @page['body'].strip %></textarea>
+		
+	</fieldset>
+	
+	<fieldset class="fields">
+		
+		<label for="page_tags">Tags</label>
+		<input name="page[tags]" id="page_tags" value="<%= @page.tags_to_s %>" type="text" />
+		
+	</fieldset>
+	
+	<fieldset class="buttons">
+		
+		<input type="submit" value="Save changes" />
+		or <a href="<%= url(@page['slug']) %>" class="cancel">cancel</a>
+	</fieldset>
+	
+	
+</form>

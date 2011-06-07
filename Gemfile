@@ -4,7 +4,6 @@ source "http://rubygems.org"
 
 gem 'sinatra'
 gem 'mongoid'
-gem 'erb'
-
+gem 'maruku'
 
 # gem 'sinatra-mongoid', :require => 'sinatra/mongoid'

@@ -1,0 +1,18 @@
+
+<form action="/" method="post">
+	
+	<label for="page_title">Title</label>
+	<input name="page[title]" id="page_title" value="<%= @page['title'] %>" />
+	
+	<label for="page_body">Body</label>
+	<textarea name="page[body]" id="page_body">
+	<%= @page['body'] %>
+	</textarea>
+	
+	
+	<label for="page_tags">Tags</label>
+	<input name="page[tags]" id="page_tags" value="<%= @page.tags_to_s %>">
+	
+	<input type="submit" />
+	
+</form>
