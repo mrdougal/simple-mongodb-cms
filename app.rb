@@ -52,6 +52,10 @@ class Page
   end
   
   
+  # def body
+  #   self['body']
+  # end
+  
   def body_html
     to_html(self.body)
   end
@@ -82,7 +86,7 @@ class Page
 	
   
   def create_slug
-    self['slug'] = to_slug(self['title'])
+    self['slug'] = to_slug(self['title'].strip)
   end
   
 end
@@ -92,6 +96,16 @@ end
 # Sinatra application
 # -------------------
 
+
+helpers do 
+
+  # String strings
+  def strip string
+    return if string.nil?
+    string.to_s.strip
+  end
+    
+end
 
 layout 'layout'
 
@@ -134,6 +148,10 @@ get "/:slug/edit" do
   @title = 'Editing a page'
   @page = Page.find_by_slug params[:slug]
   
+  # Send this on to the next matching route
+  # which is the 404/missing page
+  return not_found if @page.nil?
+  
   erb :edit
   
 end
@@ -145,13 +163,14 @@ post "/:slug" do
   
   # Send this on to the next matching route
   # which is the 404/missing page
-  pass if @page.nil?
+  return not_found if @page.nil?
 
-  @page.update_attributes params[:page]
-  
-  
-  erb :show
-  
+  if @page.update_attributes params[:page]
+    redirect to(@page.slug)
+  else
+    erb :show
+  end
+
 end
 
 
@@ -168,10 +187,13 @@ get "/:slug" do
   
 end
 
+
 # 404 page
-get "*" do
-  
+not_found do
+
   status 404
   erb :missing
-  
+
 end
+
+
