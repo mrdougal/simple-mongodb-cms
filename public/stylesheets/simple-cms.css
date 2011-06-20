@@ -11,8 +11,13 @@ body {
 	margin: 0;
 	font: 14pt Georgia, "Times New Roman", Times, serif;
 	color: #212424;
-	padding: 30px;
+	padding: 60px 180px 120px 60px;
 	background-color: #fff;
+	border-top: 10px solid #515151;
+}
+
+p {
+	margin-bottom: 10pt;
 }
 
 header {
@@ -20,9 +25,14 @@ header {
 }
 
 footer {
-	padding-top: 30px;
-	color: #fffefe;
+	padding-top: 40px;
+	color: rgba(145,145,145,0.5);
 	font-size: 12pt;
+	border-top: 1px dashed #cacaca;
+	margin-left: -60px;
+	padding-left: 60px;
+	margin-right: -180px;
+	margin-top: 40px;
 }
 
 /* @group forms */
@@ -39,7 +49,8 @@ label {
 
 input[type=text], textarea {
 	width: 70%;
-	padding: 5px;
+	padding: 5pt;
+	margin-bottom: 10pt;
 }
 
 textarea {
@@ -54,25 +65,33 @@ a.cancel {
 	color: #c00;
 }
 
+p.hints {
+	color: #919191;
+}
+
 /* @end */
 
-/* @group crud */
+/* @group menu */
 
-#crud {
+menu#main {
 	position: fixed;
 	top: 0;
-	right: 40px;
+	right: 20px;
 	margin-left: 0;
 	margin-right: 0;
 	padding: 20px 20px 70px;
 	background: url(img/background.png) repeat-x center bottom;
 }
 
-#crud li {
+menu#main ul {
+	margin: 0;
+}
+
+menu#main li {
 	display: inline;
 }
 
-#crud li a {
+menu#main li a {
 	color: #fff;
 	display: block;
 	padding-right: 10px;
@@ -85,13 +104,29 @@ a.cancel {
 
 }
 
-#crud li a:hover {
+menu#main li a:hover {
 	text-decoration: underline;
 }
 
-#crud li a.new {
-	margin-bottom: 10px;
+/* @group crud */
+
+ul#crud {
+	display: block;
+	float: left;
+	padding-top: 10pt;
 }
+
+#crud li h4 {
+	color: rgba(245,110,29,0.5);
+	font: normal normal 7pt "Lucida Grande", Lucida, Verdana, sans-serif;
+	text-transform: uppercase;
+}
+
+#crud li a.new {
+	margin-bottom: 10pt;
+}
+
+/* @end */
 
 
 

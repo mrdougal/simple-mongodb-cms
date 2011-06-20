@@ -25,6 +25,12 @@
 		
 		<label for="page_tags">Tags</label>
 		<input name="page[tags]" id="page_tags" value="<%= @page.tags_to_s %>" type="text" />
+		<p class="hints">Comma separated values</p>
+		
+		<label for="page_publish" class="small">
+			<input name="page[publish]" id="page_publish" value="<%= @page.published? %>" type="checkbox" />
+			Publish?
+		</label>
 		
 	</fieldset>
 	
@@ -38,4 +44,3 @@
 </form>
 
 
-<%= erb :_crud %>

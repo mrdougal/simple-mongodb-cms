@@ -6,6 +6,9 @@
 	
 	<link rel="stylesheet" href="/stylesheets/base.css">
 	<link rel="stylesheet" href="/stylesheets/simple-cms.css?v=1">
+	
+	<link rel="alternate" type="application/rss+xml" title="<%= Site.name %> Feed" href="/feed" />	
+	
 </head>
 
 	<body>
@@ -16,6 +19,7 @@
 				<%= @header %>
 			</header>
 		
+			<%= erb :_menu %>
 		
 			<div id="main" role="main">
 				<%= yield %>
