@@ -1,0 +1,8 @@
+# Mac specific stuff
+.DS_Store
+*.tmproj
+
+.rvmrc
+
+/tmp
+/logs
