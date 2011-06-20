@@ -8,33 +8,11 @@ require 'erb'
 
 # The Mongodb model
 # -----------------
+require './app/config'
 require './app/page'
 
-# class Page
-#   
-#   def self.all
-#     # [Page.new]
-#   end
-#   
-#   def self.find_by_tags
-#     []
-#   end
-#   
-#   def to_s
-#     'name'
-#   end
-#   
-# end
 
-Mongoid.configure do |config|
 
-  config.allow_dynamic_fields = true
-  
-  # Setup configuration with logging enabled
-  # so that we can see the queries to the db
-  config.master = Mongo::Connection.new('localhost', 27017, :logger => Logger.new('logs/mongodb.log')).db('simple_cms')
-
-end
 
 
 
@@ -50,6 +28,11 @@ helpers do
     return if string.nil?
     string.to_s.strip
   end
+  
+  # human date
+  def human_date string
+    string.strftime "%e %b %Y"
+  end
     
 end
 
@@ -58,7 +41,6 @@ layout 'layout'
 # The homepage
 get "/" do
   
-  @title = 'Simple CMS'
   @pages = Page.all
   
   erb :index

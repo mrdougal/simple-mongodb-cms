@@ -8,11 +8,11 @@ Dougal MacPherson <hello@newfangled.com.au>
 */
 
 body {
-	background-color: #a8d7e7;
 	margin: 0;
-	padding: 30px;
 	font: 14pt Georgia, "Times New Roman", Times, serif;
 	color: #212424;
+	padding: 30px;
+	background-color: #fff;
 }
 
 header {
@@ -53,5 +53,96 @@ input[type=submit] {
 a.cancel {
 	color: #c00;
 }
+
+/* @end */
+
+/* @group crud */
+
+#crud {
+	position: fixed;
+	top: 0;
+	right: 40px;
+	margin-left: 0;
+	margin-right: 0;
+	padding: 20px 20px 70px;
+	background: url(img/background.png) repeat-x center bottom;
+}
+
+#crud li {
+	display: inline;
+}
+
+#crud li a {
+	color: #fff;
+	display: block;
+	padding-right: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-decoration: none;
+	width: 80px;
+	text-transform: uppercase;
+	font: bold 8pt "Lucida Grande", Lucida, Verdana, sans-serif;
+
+}
+
+#crud li a:hover {
+	text-decoration: underline;
+}
+
+#crud li a.new {
+	margin-bottom: 10px;
+}
+
+
+
+/* @end */
+
+/* @group tags */
+
+ul.tags {
+	padding: 0;
+	display: block;
+	float: left;
+	width: 100%;
+	margin-bottom: 10px;
+	margin-left: 0;
+	margin-top: 20px;
+}
+
+ul.tags li {
+	display: inline;
+	padding-left: 0;
+	margin: 0;
+}
+
+.meta {
+	text-transform: uppercase;
+	font: bold 8pt "Lucida Grande", Lucida, Verdana, sans-serif;
+	text-decoration: none;
+	color: rgba(145,145,145,0.5);
+	margin-right: 10px;
+	letter-spacing: 1pt;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+ul.tags li a {
+	display: block;
+	float: left;
+	padding: 5px;
+	text-transform: uppercase;
+	font: bold 8pt "Lucida Grande", Lucida, Verdana, sans-serif;
+	text-decoration: none;
+	background-color: #cacaca;
+	color: #fff;
+	margin-right: 10px;
+	letter-spacing: 1pt;
+}
+
+ul.tags li a:hover {
+	background-color: #515151;
+}
+
+
 
 /* @end */

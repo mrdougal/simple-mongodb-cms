@@ -4,17 +4,18 @@
 <article>
 	
 	<h1><%= @title %></h1>
-	<p class="meta"><%= @page.created_at %></p>
+	<p class="meta"><%= human_date @page.created_at %></p>
 	
+	
+	<%= @page.body_html %>	
+
 	<ul class="tags">
 		<% @page['tags'].each do |tag| %>
 		<li><a href="<%= url('/tags/' << tag) %>"><%= tag %></a></li>
 		<% end %>
 	</ul>
-	
-	<%= @page.body_html %>	
+
 </article>
 
 
-
-<a href="<%= url(@page.slug << '/edit') %>" class="edit">Edit</a>
+<%= erb :_crud %>

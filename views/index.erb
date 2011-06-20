@@ -1,4 +1,3 @@
-<% title = 'Welcome' %>
 
 <ul>
 <% @pages.each do |page| %>
@@ -11,5 +10,4 @@
 <% end %>	
 </ul>
 
-
-<a href="<%= url('new') %>" class="new">New page</a>
+<%= erb :_crud %>

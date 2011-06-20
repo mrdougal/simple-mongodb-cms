@@ -12,7 +12,6 @@ class Page
   include Mongoid::Timestamps
   include Mongoid::MultiParameterAttributes 
   
-  # include Maruku
   
   field :title
   field :body
