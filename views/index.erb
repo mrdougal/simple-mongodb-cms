@@ -1,10 +1,10 @@
 <% title = 'Welcome' %>
 
 <ul>
-<% @models.each do |model| %>
+<% @pages.each do |page| %>
 	<li>
-		<a href="<%= url(model.slug) %>">
-		<%= model %>	
+		<a href="<%= url(page.slug) %>">
+			<%= page %>
 		</a>
 	</li>
 	

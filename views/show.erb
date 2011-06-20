@@ -8,7 +8,7 @@
 	
 	<ul class="tags">
 		<% @page['tags'].each do |tag| %>
-		<li><%= tag %></li>
+		<li><a href="<%= url('/tags/' << tag) %>"><%= tag %></a></li>
 		<% end %>
 	</ul>
 	
