@@ -7,6 +7,8 @@ configure do
 		:name => 'A name for your site',
 		:author => 'Dougal MacPherson',
 
+    # Social media
+    :twitter => 'mrdougal',
 
 		:admin_password => 'secret',
 		:admin_cookie_key => 'admin_cookie_key',
