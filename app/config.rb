@@ -6,6 +6,9 @@ configure do
 	
 		:name => 'A name for your site',
 		:author => 'Dougal MacPherson',
+		
+    # Used for feed generation
+		:url_base => 'http://mongo-talk.dev/',
 
     # Social media
     :twitter => 'mrdougal',

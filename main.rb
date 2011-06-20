@@ -129,6 +129,20 @@ get "/:slug" do
 end
 
 
+
+
+# Feed
+get "/feed" do
+  
+  @pages = Page.published :limit=>10
+  
+	content_type 'application/atom+xml', :charset => 'utf-8'
+	builder :feed
+	
+end
+
+
+
 # 404 page
 not_found do
 

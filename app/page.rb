@@ -26,6 +26,10 @@ class Page
     self['title']
   end
   
+  # url to the page
+  def url
+    Site.url_base.dup << slug 
+  end
   
   # Convert the array of tags into a comma seperated string
   # for display in the form (so it's easily edited by the user)
@@ -57,7 +61,19 @@ class Page
   end
   
   
+  def published?
+    !!self['published']
+  end
+  
+  
+  
   class << self
+    
+    
+    
+    def published val
+      find :all
+    end
     
     def find_by_slug val
       find :first, :conditions => { :slug => val.to_s }
@@ -76,7 +92,7 @@ class Page
 	end
 	
 	def to_slug string
-  	string.to_s.downcase.gsub(' ','-') 
+  	string.downcase.humanize
 	end
 	
   
