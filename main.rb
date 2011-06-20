@@ -1,95 +1,41 @@
+# Tell ruby to look
+# $LOAD_PATH.unshift(File.dirname(__FILE__) + '/app')
+
 require 'sinatra'
 require 'mongoid'
 require 'erb'
-require 'maruku'
-
-
-Mongoid.configure do |config|
-  name = "simple_cms"
-  host = "localhost"
-  config.allow_dynamic_fields = true
-  config.master = Mongo::Connection.new.db(name)
-end
-
 
 
 # The Mongodb model
 # -----------------
+require './app/page'
 
-class Page
+# class Page
+#   
+#   def self.all
+#     # [Page.new]
+#   end
+#   
+#   def self.find_by_tags
+#     []
+#   end
+#   
+#   def to_s
+#     'name'
+#   end
+#   
+# end
 
+Mongoid.configure do |config|
 
-  include Mongoid::Document
-  include Mongoid::Timestamps
+  config.allow_dynamic_fields = true
   
-  # include Maruku
-  
-  field :title
-  field :body
-  field :tags, :type => Array, :default => []
-  field :slug
-  
-  validates_presence_of :title
-  before_save :create_slug
-  
-  
-  def to_s
-    title
-  end
-  
-  def tags_to_s
-    self['tags'].inject([]) do |out, tag|
-      out << to_slug(tag)
-    end.join(', ')
-  end
-  
-  def tags= string
-    
-    self['tags'] = string.split(',').map do |tag|
-      tag.strip
-    end
-    
-  end
-  
-  
-  # def body
-  #   self['body']
-  # end
-  
-  def body_html
-    to_html(self.body)
-  end
-  
-  def linked_tags
-		self['tags'].inject([]) do |accum, tag|
-			accum << "<a href=\"/past/tags/#{tag}\">#{tag}</a>"
-		end.join(" ")
-	end
-  
-  class << self
-    
-    def find_by_slug val
-      find :first, :conditions => { :slug => val.to_s }
-    end
+  # Setup configuration with logging enabled
+  # so that we can see the queries to the db
+  config.master = Mongo::Connection.new('localhost', 27017, :logger => Logger.new('logs/mongodb.log')).db('simple_cms')
 
-  end
-  
-  private
-  
-  def to_html markdown
-		Maruku.new(markdown).to_html
-	end
-	
-	def to_slug string
-  	string.to_s.downcase.gsub(' ','-') 
-	end
-	
-  
-  def create_slug
-    self['slug'] = to_slug(self['title'].strip)
-  end
-  
 end
+
 
 
 
@@ -113,7 +59,7 @@ layout 'layout'
 get "/" do
   
   @title = 'Simple CMS'
-  @models = Page.all
+  @pages = Page.all
   
   erb :index
   
@@ -128,6 +74,19 @@ get "/new" do
   erb :edit
   
 end
+
+
+# Display tags
+get "/tags/:tag" do
+  
+  # params[:tag].split('/')
+  @pages = Page.find_by_tags params[:tag].split('/')
+  return not_found if @pages.empty?
+  
+  erb :index
+  
+end
+
 
 # Create a page
 post "/new" do
