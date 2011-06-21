@@ -10,9 +10,9 @@
 	<li><a href="/new" class="new">New page</a></li>
 	
 	<% if @page and @page.slug %>
-		<li><a href="/<%= @page.slug.dup << '/edit' %>" class="edit">Edit</a></li>
-		<li><a href="/<%= @page.slug.dup %>" class="show">Show</a></li>
-		<li><a href="/<%= @page.slug.dup %>" class="delete">Delete</a></li>
+		<li><a href="<%= @page.url.dup << '/edit' %>" class="edit">Edit</a></li>
+		<li><a href="<%= @page.url.dup %>" class="show">Show</a></li>
+		<li><a href="<%= @page.url.dup %>" class="delete">Delete</a></li>
 	<% end %>
 	
 </ul>

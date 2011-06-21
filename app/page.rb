@@ -50,7 +50,11 @@ class Page
   
   # url to the page
   def url
-    Site.url_base.dup << slug 
+    Site.url_base.dup << (slug or '')
+  end
+  
+  def slug
+    self['slug']
   end
   
   # Convert the array of tags into a comma seperated string
@@ -130,24 +134,23 @@ end
 class Comment
   
   include Mongoid::Document
-  include Mongoid::Timestamps
   
   embedded_in :page, :inverse_of => :comments
   
   field :author
   field :email
-  field :text
+  field :body
   
   
-  validates_presence_of :name, :text
+  validates_presence_of :author, :body
   
   
   def to_s
-    text
+    body
   end
   
-  def text_html
-    to_html(self.text)
+  def body_html
+    to_html(self.body)
   end
   
 end

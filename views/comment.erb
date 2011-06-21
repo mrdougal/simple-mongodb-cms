@@ -1,0 +1,34 @@
+Form to comment
+
+
+<% if @comment.errors %>
+
+	<ul class="errors">
+	<% @comment.errors.each_pair do |key, value| %>
+		<li><%= key %> <%= value.join(' and ') %></li>
+	<% end %>
+	</ul>
+<% end %>
+
+<form action="<%= to(@page.url << '/comments') %>" method="post">
+	
+	<fieldset class="fields">
+		
+		<label for="comment_author">Author</label>
+		<input name="comment[author]" id="comment_title" value="<%= strip @comment['author'] %>" type="text" />
+	
+		<label for="comment_body">Body</label>
+		<textarea name="comment[body]" id="comment_body"><%= strip @comment['body'] %></textarea>
+		
+	</fieldset>
+	
+	<fieldset class="buttons">
+		
+		<input type="submit" value="Save changes" />
+		or <a href="<%= url(@page.url) %>" class="cancel">cancel</a>
+	</fieldset>
+	
+	
+</form>
+
+

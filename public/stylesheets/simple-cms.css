@@ -213,16 +213,28 @@ ul.tags li a:hover {
 
 /* @group comments */
 
-comments {
+#comments {
 	display: block;
 	float: left;
 	clear: both;
 	width: 100%;
+	background: url(img/comments.png) no-repeat;
+	margin-left: -25px;
+	padding-left: 25px;
+	font-size: 80%;
+	margin-top: 20pt;
 }
 
 .comment {
 	clear: both;
 	display: block;
+}
+
+.comment .date, .comment .author {
+	color: rgba(145,145,145,0.5);
+	font-size: 8pt;
+	text-transform: uppercase;
+	font-weight: bold;
 }
 
 

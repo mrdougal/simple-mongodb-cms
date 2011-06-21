@@ -32,7 +32,7 @@ end
 get "/new" do
   
   @page = Page.new
-  
+  @title = 'Create a new page'
   erb :edit
   
 end
@@ -96,17 +96,48 @@ get "/:slug" do
   
 end
 
+
+
+# ********
+# Comments
+# ********
+
 # Create a comment on a page
 post "/:slug/comments" do
   
   find_page
-  @page.build_comments params[:comment]
   
-  erb :show
+  # Build the comment based on the params
+  @comment = Comment.new params[:comment] 
+  
+  
+  if @comment.valid?
+    
+    @comment['created_at'] = Time.now
+    @page.comments << @comment
+    @page.save
+  
+    redirect to(@page.url)
+
+  else
+    
+    # We don't have a valid comment
+    erb :comment
+    
+  end
+  
   
 end
 
-
+get "/:slug/comments/new" do
+  
+  find_page
+  
+  @comment = Comment.new
+  
+  erb :comment
+  
+end
 
 
 # Feed

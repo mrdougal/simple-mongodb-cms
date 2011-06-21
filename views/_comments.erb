@@ -6,11 +6,13 @@
 	
 	<% @page.comments.each do |comment| %>
 		<div class="comment">
-			<%= human_date comment.created_at %>
-			<%= comment.author %> said...
-			<%= comment.text_html %>
+			<span class="date"><%= human_date comment.created_at %></span>
+			<span class="author"><%= comment.author %> said...</span>
+			<%= comment.body_html %>
 		</div>
 	<% end %>
+	
+	<a href="<%= @page.url %>/comments/new">Add a comment</a>
 	
 </div>
 
