@@ -10,16 +10,28 @@ class Page
 
   include Mongoid::Document
   include Mongoid::Timestamps
-  include Mongoid::MultiParameterAttributes 
   
+  
+  # Fields in our MongoDB document
+  # Mongoid will create getters and setters for each of these fields
+  # eg: title= and title
   
   field :title
   field :body
   field :tags, :type => Array, :default => []
   field :slug
-  
+  field :published, :type => Boolean, :default => false 
+
+
+
+  # Validations on our models
+  validates_uniqueness_of :title
   validates_presence_of :title
-  before_save :create_slug
+  
+  # Create a slug to be used for SEO urls
+  after_validation :create_slug
+  
+  
   
   # Shorthand for 'to string'
   def to_s
@@ -52,15 +64,12 @@ class Page
     end
   end
 
-  def body
-    self['body']
-  end
-  
+
   def body_html
     to_html(self.body)
   end
   
-  
+  # Returns a boolean
   def published?
     !!self['published']
   end
@@ -69,14 +78,12 @@ class Page
   
   class << self
     
-    
-    
     def published val
-      find :all
+      where :published => true
     end
     
     def find_by_slug val
-      find :first, :conditions => { :slug => val.to_s }
+      where :slug => val.to_s
     end
 
     def find_by_tags tags
@@ -84,6 +91,8 @@ class Page
     end
 
   end
+ 
+ 
   
   private
   
@@ -91,14 +100,21 @@ class Page
 		Maruku.new(markdown).to_html
 	end
 	
-	def to_slug string
-  	string.downcase.humanize
-	end
-	
-  
+  # Createa url friendly string from the page title
   def create_slug
-    self['slug'] = to_slug(self['title'].strip)
+    self.slug = to_slug(self.title)
   end
   
+  
+  # * convert to a string...
+  # * strip whitespace
+  # * downcase
+  # * identify the string (convert spaces to hyphens)
+	def to_slug string
+	  
+	  return if string.nil?
+  	string.to_s.strip.downcase.identify
+	end
+	
 end
 

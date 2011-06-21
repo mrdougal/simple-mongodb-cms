@@ -1,13 +1,16 @@
+# encoding: UTF-8
 
-# $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'app'))
-# $LOAD_PATH.unshift(File.dirname(__FILE__))
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'main'))
 
-require File.join(File.dirname(__FILE__), '..', 'app.rb')
-
+# We need to explicitly require sinatra as rspec is geared more towards Rails
+require 'sinatra'
 require 'rspec'
 require 'rack/test'
 
-# require '../app'
+
+def app
+  @app ||= Sinatra::Application
+end
 
 # RSpec.configure do |config|
   
@@ -18,11 +21,4 @@ require 'rack/test'
   
   # config.
   
-# end
-
-
-# describe "subject" do
-#   it "should " do
-#     raise "Boom rspec init"
-#   end  
 # end

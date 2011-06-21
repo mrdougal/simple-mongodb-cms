@@ -1,20 +1,13 @@
 # encoding: UTF-8
-
-# $LOAD_PATH.unshift(File.dirname(__FILE__))
-
-
 require File.dirname(__FILE__) + '/spec_helper'
 
-describe "General" do
+
+describe 'Main' do
   
   include Rack::Test::Methods
   
-  def app
-    @app ||= Sinatra::Application
-  end
-  
+
   it "should be homepage" do
-    
     get '/'
     last_response.should be_ok
     
