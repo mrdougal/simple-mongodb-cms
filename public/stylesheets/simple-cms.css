@@ -9,11 +9,38 @@ Dougal MacPherson <hello@newfangled.com.au>
 
 body {
 	margin: 0;
-	font: 14pt Georgia, "Times New Roman", Times, serif;
 	color: #212424;
 	padding: 60px 180px 120px 60px;
 	background-color: #fff;
 	border-top: 10px solid #515151;
+	font: 12pt/160% "Lucida Grande", Lucida, Verdana, sans-serif;
+}
+
+h1 {
+	text-transform: uppercase;
+	font: bold 14pt "Lucida Grande", Lucida, Verdana, sans-serif;
+	margin-bottom: 10pt;
+	letter-spacing: 2pt;
+}
+
+h2 {
+	text-transform: uppercase;
+	font: bold 14pt "Lucida Grande", Lucida, Verdana, sans-serif;
+	margin-bottom: 10pt;
+	letter-spacing: 2pt;
+}
+
+h3 {
+	text-transform: uppercase;
+	font: bold 10pt "Lucida Grande", Lucida, Verdana, sans-serif;
+	margin-bottom: 10pt;
+	letter-spacing: 2pt;
+}
+
+h4 {
+	text-transform: uppercase;
+	font: bold 8pt "Lucida Grande", Lucida, Verdana, sans-serif;
+	margin-bottom: 10pt;
 }
 
 p {
@@ -29,10 +56,10 @@ footer {
 	color: rgba(145,145,145,0.5);
 	font-size: 12pt;
 	border-top: 1px dashed #cacaca;
-	margin-left: -60px;
-	padding-left: 60px;
-	margin-right: -180px;
 	margin-top: 40px;
+	display: block;
+	float: left;
+	width: 100%;
 }
 
 /* @group forms */
@@ -81,6 +108,7 @@ menu#main {
 	margin-right: 0;
 	padding: 20px 20px 70px;
 	background: url(img/background.png) repeat-x center bottom;
+	border-top: 10px solid #8a0b06;
 }
 
 menu#main ul {
@@ -139,9 +167,10 @@ ul.tags {
 	display: block;
 	float: left;
 	width: 100%;
-	margin-bottom: 10px;
+	margin-bottom: 20px;
 	margin-left: 0;
-	margin-top: 20px;
+	clear: both;
+	margin-top: 0;
 }
 
 ul.tags li {
@@ -176,6 +205,24 @@ ul.tags li a {
 
 ul.tags li a:hover {
 	background-color: #515151;
+}
+
+
+
+/* @end */
+
+/* @group comments */
+
+comments {
+	display: block;
+	float: left;
+	clear: both;
+	width: 100%;
+}
+
+.comment {
+	clear: both;
+	display: block;
 }
 
 

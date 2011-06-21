@@ -9,12 +9,19 @@
 	
 	<%= @page.body_html %>	
 
+
+</article>
+
+
+<aside>
+
 	<ul class="tags">
 		<% @page['tags'].each do |tag| %>
 		<li><a href="<%= url('/tags/' << tag) %>"><%= tag %></a></li>
 		<% end %>
 	</ul>
 
-</article>
-
-
+	<%= erb :_comments if @page.comments %>
+	
+	
+</aside>
