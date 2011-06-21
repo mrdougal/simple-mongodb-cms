@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 # Tell ruby to look
 # $LOAD_PATH.unshift(File.dirname(__FILE__) + '/app')
 
@@ -5,15 +7,34 @@ require 'sinatra'
 require 'mongoid'
 require 'erb'
 
+# For converting text input into html
+require 'maruku'
+
+
 
 # Our application
 # -----------------
 require './app/config'
-require './app/page'
 require './app/helpers'
+require './app/models'
 
 
-layout 'layout'
+
+def find_page
+
+  return unless params[:slug]
+
+  @page = Page.find_by_slug(params[:slug]).first
+  
+  # MongoDB query
+  # db.pages.find({ "slug" : slug }).limit(1)
+  
+
+  # Send this on to the next matching route
+  # which is the 404/missing page
+  return not_found if @page.nil?
+
+end
 
 
 
@@ -21,11 +42,78 @@ layout 'layout'
 # The homepage
 get "/" do
   
+  @pages = Page.published
+  
+  # MongoDB query
+  # db.pages.find({ "published" : true })
+  
+
+  if @pages.empty?
+    
+    # If we don't have any pages published give them an empty page
+    @title = "No posts to show"
+    erb :empty
+  else
+    erb :index
+  end
+end
+
+# Feed
+get "/feed" do
+  
+  @pages = Page.published :limit => 10
+  
+  # MongoDB query
+  # db.pages.find({ "published" : true }, { "limit" : 10 })
+  
+  
+	content_type 'application/atom+xml', :charset => 'utf-8'
+	builder :feed
+	
+end
+
+
+# Show all pages (published or not)
+get "/all" do
+  
   @pages = Page.all
+
+  # MongoDB query...
+  # db.pages.find()
+  
+  
+
+  if @pages.empty?
+    
+    # If we don't have any pages published give them an empty page
+    @title = "No posts to show"
+    erb :empty
+  else
+    erb :index
+  end
+end
+
+
+# Display tags
+get "/tags/:tag" do
+  
+
+  @pages = Page.find_by_tags params[:tag].split('/')
+
+  # MongoDB query
+  # db.pages.find({ "tags" : { "$in" : [ tag1, tag2 ]}  })
+  # 
+  # '$in' all values present to match
+  # '$or' any values present to match
+  # '$ne' no values present to match
+
+  return not_found if @pages.empty?
   
   erb :index
   
 end
+
+
 
 
 # Init a new page
@@ -36,19 +124,6 @@ get "/new" do
   erb :edit
   
 end
-
-
-# Display tags
-get "/tags/:tag" do
-  
-  # params[:tag].split('/')
-  @pages = Page.find_by_tags params[:tag].split('/')
-  return not_found if @pages.empty?
-  
-  erb :index
-  
-end
-
 
 # Create a page
 post "/new" do
@@ -149,15 +224,6 @@ get "/:slug/comments/new" do
 end
 
 
-# Feed
-get "/feed" do
-  
-  @pages = Page.published :limit=>10
-  
-	content_type 'application/atom+xml', :charset => 'utf-8'
-	builder :feed
-	
-end
 
 
 

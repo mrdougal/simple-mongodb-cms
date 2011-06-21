@@ -1,5 +1,5 @@
-# 2011-06-06 
-# Dougal MacPherson <hello@newfangled.com.au>
+# encoding: UTF-8
+
 
 require './main'
 

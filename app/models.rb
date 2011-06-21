@@ -1,15 +1,21 @@
-# 2011-06-07 
-# Dougal MacPherson <hello@newfangled.com.au>
-# 
-# The model backed by MongoDB
+# encoding: UTF-8
 
 
-require 'maruku'
-
-def to_html markdown
-	Maruku.new(markdown).to_html
-end
-
+#   This file contains the models which are ultimately saved to MongoDB 
+#   We're using MongoID which is an Object Document Mapper (ODM) written in Ruby
+#   http://mongoid.org/
+#   
+#   We are writting the database queries into a log file (logs/mongodb.log) so you can
+#   tail the log to see what is happening within the application. 
+#   
+#   Fortunately queries in mongodb are easy to read
+#   as you effectively pass a javascript object to the find method
+#   
+#       the db    the collection
+#         |           |
+#         |           |          key        desired value
+#         |           |           |             |
+#     simple_cms['pages'].find({ "slug" : "this-is-my-1st-post"})
 
 
 class Page
@@ -21,7 +27,8 @@ class Page
   
   # Fields in our MongoDB document
   # Mongoid will create getters and setters for each of these fields
-  # eg: title= and title
+  # eg: page['title'] = 'About us'
+  #     page.title    = 'About us'
   
   field :title
   field :body
@@ -31,7 +38,12 @@ class Page
 
 
 
-  # Validations on our models
+
+
+
+
+
+  # Minimal validations on our models
   validates_uniqueness_of :title
   validates_presence_of :title
   
@@ -39,7 +51,7 @@ class Page
   after_validation :create_slug
   
   
-  
+  # We have embedded documents within a page
   embeds_many :comments
   
   
@@ -90,9 +102,11 @@ class Page
   
   
   
+  # These are class methods
   class << self
     
-    def published val
+
+    def published
       where :published => true
     end
     
@@ -100,9 +114,11 @@ class Page
       where :slug => val.to_s
     end
 
+
     def find_by_tags tags
       any_in :tags => tags
     end
+    
 
   end
  
@@ -130,8 +146,29 @@ class Page
 end
 
 
-# Comments are embedded in pages
+#   Multiple comments can be embedded within a page (they are stored as an array)
+# 
+# 
+#     page {
+#             id: 4e001440fb8d5f9044000001
+#             title: 'Living the webscale dream with MongoDB '
+#             body: 'Recently we started using MongoDB in our product...' 
+# 
+#             comments: [
+#                 { id: 4e001440fb8d5f9044000002,
+#                   author: 'Trevor Wilson',
+#                   body: 'This is awesome stuff...'
+#                 },
+#                 { id: 4e001440fb8d5f9044000003,
+#                   author: 'John Doe',
+#                   body: 'We have been using MongoDB at my work...'
+#                 }]
+#       
+#     }
+# 
+# 
 class Comment
+  
   
   include Mongoid::Document
   
@@ -153,4 +190,13 @@ class Comment
     to_html(self.body)
   end
   
-end
+end  
+  
+  
+  
+  
+  def to_html markdown
+  	Maruku.new(markdown).to_html
+  end
+
+  

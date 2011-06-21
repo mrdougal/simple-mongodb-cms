@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 configure do
   
 	require 'ostruct'
@@ -15,10 +17,12 @@ configure do
 
 		:admin_password => 'secret',
 		:admin_cookie_key => 'admin_cookie_key',
-		:admin_cookie_value => '54l976913ace58'
+		:admin_cookie_value => '54l976913ace58' 
 		
-
 	)
+
+  # The default layout for the application
+  layout 'layout'
 	
 	
   # Config for connecting to the MongoDB database
