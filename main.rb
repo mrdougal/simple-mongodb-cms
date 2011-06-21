@@ -63,15 +63,12 @@ post "/new" do
   
 end
 
+
 # Edit a page
 get "/:slug/edit" do
   
+  find_page
   @title = 'Editing a page'
-  @page = Page.find_by_slug params[:slug]
-  
-  # Send this on to the next matching route
-  # which is the 404/missing page
-  return not_found if @page.nil?
   
   erb :edit
   
@@ -80,12 +77,8 @@ end
 # Update a page
 post "/:slug" do
 
-  @page = Page.find_by_slug(params[:slug]).first
+  find_page
   
-  # Send this on to the next matching route
-  # which is the 404/missing page
-  return not_found if @page.nil?
-
   if @page.update_attributes params[:page]
     redirect to(@page.slug)
   else
@@ -98,11 +91,16 @@ end
 # Show page
 get "/:slug" do
   
-  @page = Page.find_by_slug(params[:slug]).first
+  find_page
+  erb :show
   
-  # Send this on to the next matching route
-  # which is the 404/missing page
-  pass if @page.nil?
+end
+
+# Create a comment on a page
+post "/:slug/comments" do
+  
+  find_page
+  @page.build_comments params[:comment]
   
   erb :show
   
