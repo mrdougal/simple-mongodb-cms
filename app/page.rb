@@ -3,7 +3,14 @@
 # 
 # The model backed by MongoDB
 
+
 require 'maruku'
+
+def to_html markdown
+	Maruku.new(markdown).to_html
+end
+
+
 
 class Page
 
@@ -31,6 +38,9 @@ class Page
   # Create a slug to be used for SEO urls
   after_validation :create_slug
   
+  
+  
+  embeds_many :comments
   
   
   # Shorthand for 'to string'
@@ -96,9 +106,6 @@ class Page
   
   private
   
-  def to_html markdown
-		Maruku.new(markdown).to_html
-	end
 	
   # Createa url friendly string from the page title
   def create_slug
@@ -118,3 +125,29 @@ class Page
 	
 end
 
+
+# Comments are embedded in pages
+class Comment
+  
+  include Mongoid::Document
+  include Mongoid::Timestamps
+  
+  embedded_in :page, :inverse_of => :comments
+  
+  field :author
+  field :email
+  field :text
+  
+  
+  validates_presence_of :name, :text
+  
+  
+  def to_s
+    text
+  end
+  
+  def text_html
+    to_html(self.text)
+  end
+  
+end

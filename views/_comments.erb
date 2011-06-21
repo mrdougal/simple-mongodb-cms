@@ -1,0 +1,16 @@
+
+
+<div id="comments">
+	
+	<h4>Comments</h4>
+	
+	<% @page.comments.each do |comment| %>
+		<div class="comment">
+			<%= human_date comment.created_at %>
+			<%= comment.author %> said...
+			<%= comment.text_html %>
+		</div>
+	<% end %>
+	
+</div>
+
