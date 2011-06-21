@@ -87,6 +87,15 @@ post "/:slug" do
 
 end
 
+get "/:slug/delete" do
+  
+  find_page
+  @page.delete
+
+  # Display a message to the user
+  erb "The page <strong>\"#{@page}\"</strong> and it's comments was deleted."
+  
+end
 
 # Show page
 get "/:slug" do

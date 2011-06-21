@@ -12,7 +12,7 @@
 	<% if @page and @page.slug %>
 		<li><a href="<%= @page.url.dup << '/edit' %>" class="edit">Edit</a></li>
 		<li><a href="<%= @page.url.dup %>" class="show">Show</a></li>
-		<li><a href="<%= @page.url.dup %>" class="delete">Delete</a></li>
+		<li><a href="<%= @page.url.dup << '/delete' %>" class="delete">Delete</a></li>
 	<% end %>
 	
 </ul>
