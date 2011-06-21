@@ -13,11 +13,7 @@ configure do
 		:url_base => 'http://mongo-talk.dev/',
 
     # Social media
-    :twitter => 'mrdougal',
-
-		:admin_password => 'secret',
-		:admin_cookie_key => 'admin_cookie_key',
-		:admin_cookie_value => '54l976913ace58' 
+    :twitter => 'mrdougal'
 		
 	)
 

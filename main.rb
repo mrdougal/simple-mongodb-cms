@@ -166,6 +166,11 @@ get "/:slug/delete" do
   
   find_page
   @page.delete
+  
+  # MongoDB query
+  # db.pages.find({ "slug" : 'my-slug' }).destroy()
+  
+  
 
   # Display a message to the user
   erb "The page <strong>\"#{@page}\"</strong> and it's comments was deleted."

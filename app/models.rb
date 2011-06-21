@@ -150,16 +150,16 @@ end
 # 
 # 
 #     page {
-#             id: 4e001440fb8d5f9044000001
+#             id: 001
 #             title: 'Living the webscale dream with MongoDB '
 #             body: 'Recently we started using MongoDB in our product...' 
 # 
 #             comments: [
-#                 { id: 4e001440fb8d5f9044000002,
+#                 { id: 002,
 #                   author: 'Trevor Wilson',
 #                   body: 'This is awesome stuff...'
 #                 },
-#                 { id: 4e001440fb8d5f9044000003,
+#                 { id: 003,
 #                   author: 'John Doe',
 #                   body: 'We have been using MongoDB at my work...'
 #                 }]
